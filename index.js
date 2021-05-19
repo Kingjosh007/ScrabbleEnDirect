@@ -4,14 +4,14 @@ const chalk = require('chalk');
 
 
 var fichierJoueurs = require("./joueursParNation.json");
+var parametresTournoi = require("./parametresTournoi.json")
 
 
 
-var lienTournoi =
-  "https://www.ffsc.fr/endirect/endirect.php?tournoi_id=champas2021blitz&page=parties";
-var numPartie = 4;
-let nomTournoi = "CHAMPAS BLITZ DAKAR 2021";
-var linkTest = lienTournoi + "&numero=1&coup=1&action=scores&tri=table";
+var lienTournoi = parametresTournoi.lienTournoi;
+var numPartie = parametresTournoi.numeroPartie;
+let nomTournoi = parametresTournoi.nomTournoi;
+
 
 function linkBuilder(np, nc) {
   return (
@@ -110,7 +110,7 @@ async function classementPartie(np, pourCumul = false) {
   return playersNegatifsInfos;
 }
 
-async function classementDuCoup(np, nc) {
+async function bilanDuCoupParTables(np, nc) {
   let canProcess = true;
   let coupActuel = nc;
 
@@ -230,8 +230,11 @@ async function classementAuCumul(nbParties) {
 }
 
 (async function launch() {
+
   // let classement = await classementPartie(numPartie);
-  // let classement = await classementDuCoup(numPartie, 23);
+  // let classement = await bilanDuCoupParTables(numPartie, 23);
   let classement = await classementAuCumul(numPartie);
+
   console.table(classement);
+  
 })();
