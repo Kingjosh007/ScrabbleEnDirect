@@ -56,7 +56,7 @@ async function classementPartie(np, pourCumul = false) {
 
   if (pourCumul == false)
     console.log(
-      "\n\n\n      " +
+      "\n\n\n     " +
         nomTournoi +
         " - PARTIE NUMERO " +
         np +
@@ -70,6 +70,8 @@ async function classementPartie(np, pourCumul = false) {
     //   console.log(coupActuel);
     let data = await scraper.get(link);
     let classementArr = data[0].slice(1);
+
+    // console.log(classementArr[0]);
 
     for (let c of classementArr) {
       let playerName = c["1"];
@@ -231,9 +233,9 @@ async function classementAuCumul(nbParties) {
 
 (async function launch() {
 
-  // let classement = await classementPartie(numPartie);
+  let classement = await classementPartie(numPartie);
   // let classement = await bilanDuCoupParTable(numPartie, 23);
-  let classement = await classementAuCumul(numPartie);
+  // let classement = await classementAuCumul(numPartie);
 
   console.table(classement);
 
