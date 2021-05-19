@@ -1,0 +1,17 @@
+{
+  "name": "ScrabbleEnDirect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "console-table-printer": "^2.9.0",
+    "table-scraper": "^1.0.3"
+  }
+}

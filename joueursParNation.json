@@ -1,0 +1,53 @@
+[
+    {
+        "codeNation": "BF",
+        "nomNation": "Burkina-Faso",
+        "joueurs": ["BARGO Seydou", "KONATE Roland", "LENGANE Ousmane", "OUATTARA Siaka", "SALL Amadou", "TRAORE Abdoul Aziz", "TRAORE Yacouba", "WANDAOGO Abdoul Karim"]
+    },
+    {
+        "codeNation": "BJ",
+        "nomNation": "Bénin",
+        "joueurs": ["AFFATON Julien", "AGBANGLASSI Emile"]
+    },
+    {
+        "codeNation": "CI",
+        "nomNation": "Côte d'Ivoire",
+        "joueurs": ["BALOU Bi Séri Franck", "BEUGREFOH Sylvestre", "EBARRE Atté Léon", "KOUADJA Edo Hermann", "YAPI Serge Alban", "ZINGBE Gueu Mathieu"]
+    },
+    {
+        "codeNation": "CM",
+        "nomNation": "Cameroun",
+        "joueurs": ["BALOG François Roland", "BEME LINGUINE AMABAYA Stève Marcel", "FONKEU NGAHAN Yannick", "LOVET Isaac Raymond", "NDONGO OMGBA Etienne Rigobert", "SEUNANG Patrick Ulrich", "TAKEU NGUEMNENG Patrick", "TCHEBE Stéphane Rodrigue", "TCHOUYO Eric Salvador", "TSOUNGUI Antoine Romain", "TSUATA LANDO Wilfried"]
+    },
+    {
+        "codeNation": "CG",
+        "nomNation": "Congo",
+        "joueurs": ["DE BIDIER Kani", "MALOKI Daley", "MIKOLELE BILOMBO Christel", "SOKI Kévin", "TCHICAYA Cyrille"]
+    },
+    {
+        "codeNation": "ML",
+        "nomNation": "Mali",
+        "joueurs": ["COULIBALY Massa", "DEMBELE Youssouf", "DIALLO Bourahima", "HAMIDOU Aliou", "KOITA Tiemoko", "SIDIBE Karim"]
+    },
+    {
+        "codeNation": "MR",
+        "nomNation": "Mauritanie",
+        "joueurs": ["BA Daouda", "BEYROUK Hacen", "EL MOUSTAPHA El Hacen Seiloum", "GAYA Ely Brahim", "HAROUNA Ibrahim", "KLEIB Ahmed Mahmoud Bade", "LY Mamoudou Souleymane", "MOUSSA Maman Nourou", "SALL ALHOUSSEIN Oumar"]
+    },
+    {
+        "codeNation": "NE",
+        "nomNation": "Niger",
+        "joueurs": ["ABDOUL-KARIM Mana", "ABDOUL RAZACK Mahamane Garba", "ABDOURAMANE Moussa", "ABDOURAHAMANE Moussa", "MOUSSA Hassane"]
+    },
+    {
+        "codeNation": "SN",
+        "nomNation": "Sénégal",
+        "joueurs": ["DIENG Djibril", "DIOKH Amar", "DIOP Malick", "DIOP Mamadou Khalifa", "CISSE Sidy Ibrahima", "FAYE Abdou", "GASSAMA Adama", "GUENE Mamadou", "GUEYE Abdoulaye", "KABA Mohamed Diaté", "LY Baidy Oumar", "MANE Boubakar", "MBAYE Moussa", "MBAYE Moustapha Ngoné", "MBENGUE Babacar", "MBENGUE Mamadou", "NDIAYE Babacar", "NDIAYE Mbaye", "NIANG Mohamed", "SAKHO Papa Aly", "SAMB Babacar", "SAMB Baye Souleymane", "SECK Cheikh", "SOW Alassane", "SY Mouhamed", "SYLLA Abdoulaye", "THIAW Ousmane", "THIOUNE Papa Mbacke"]
+    },
+    {
+        "codeNation": "TG",
+        "nomNation": "Togo",
+        "joueurs": ["ADJOGAH Kodjo Enyonam", "LAWANI Lamidi"]
+    }
+
+]
