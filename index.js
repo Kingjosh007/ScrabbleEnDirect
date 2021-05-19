@@ -110,7 +110,7 @@ async function classementPartie(np, pourCumul = false) {
   return playersNegatifsInfos;
 }
 
-async function bilanDuCoupParTables(np, nc) {
+async function bilanDuCoupParTable(np, nc) {
   let canProcess = true;
   let coupActuel = nc;
 
@@ -232,9 +232,9 @@ async function classementAuCumul(nbParties) {
 (async function launch() {
 
   // let classement = await classementPartie(numPartie);
-  // let classement = await bilanDuCoupParTables(numPartie, 23);
+  // let classement = await bilanDuCoupParTable(numPartie, 23);
   let classement = await classementAuCumul(numPartie);
 
   console.table(classement);
-  
+
 })();
