@@ -1,6 +1,7 @@
 var scraper = require("table-scraper");
 const { printTable } = require("console-table-printer");
 const chalk = require('chalk');
+const clipboardy = require('clipboardy');
 
 
 var fichierJoueurs = require("./joueursParNation.json");
@@ -74,9 +75,11 @@ async function classementPartie(np, pourCumul = false) {
     // console.log(classementArr[0]);
 
     for (let c of classementArr) {
+      // console.log(c);
       let playerName = c["1"];
       let playerSerie = c["3"];
       let playerNeg = c["2"] == "Top" ? 0 : Number(c["2"]);
+      
 
       let playerObj = {
         Nom: playerName,
@@ -186,6 +189,7 @@ async function classementAuCumul(nbParties) {
 
   for (let i = 1; i <= nbParties; i++) {
     let clPartie = await classementPartie(i, true);
+    console.log(clPartie.length);
     clPartie = clPartie.map((el) => {
       let newEl = el;
       if (newEl["Négatif"] == "Top") newEl["Négatif"] = 0;
@@ -216,8 +220,8 @@ async function classementAuCumul(nbParties) {
     (pl) =>
       pl.hasOwnProperty("P1") &&
       pl.hasOwnProperty("P2") &&
-      Number(pl.P1) &&
-      Number(pl.P2)
+      pl.P1 != undefined &&
+      pl.P2 != undefined
   );
   cumulArr = cumulArr.map((el) => {
     let newEl = el;
@@ -231,11 +235,82 @@ async function classementAuCumul(nbParties) {
   return cumulArr;
 }
 
+const clString = (rg) => rg==1? "1er": rg+"ème";
+
+function classementParNations(classementGlobal, np) {
+
+  console.log(
+    "\n\n\n       " +
+      nomTournoi +
+      " - CLASSEMENT PROVISOIRE DES NATIONS APRES " +
+      np +
+      " PARTIES \n\n"
+  );
+
+  console.log("       Classement basé sur les performances des 5 meilleurs joueurs de chaque nation ayant aligné au moins 5 joueurs sur l'épreuve.")
+
+  console.log("\n       Chaque nom est suivi de son classement global et de son négatif entre parenthèses \n\n");
+
+  let pp = [];
+  for(let i=1; i<=np; i++)
+      pp.push("P"+i);
+
+  let classementModif = classementGlobal.map((el, i) => {
+    let newEl = {
+      "Rang": i+1,
+      "NomPays": nomPaysJoueur(el["Nom"])
+    }
+    for(let k in el)
+    {
+      newEl[k] = el[k];
+    }
+    return newEl;
+  })
+  // Juste les pays qui ont au moins 5 joueurs ayant disputé toutes les parties;
+  let paysConcernes = fichierJoueurs.filter(p => {
+    let joueursAyantToutJoue = classementModif.filter(cl =>  {
+      return cl.Pays == p.codeNation && pp.every(key => cl.hasOwnProperty(key) && cl[key]!=undefined)
+    })  
+    return joueursAyantToutJoue.length >= 5;
+  });
+
+  let codesPays = [...new Set(paysConcernes.map(el => el.codeNation))];
+
+  let classementArr = [];
+
+  for(let pays of codesPays)
+  {
+    let topFive = classementModif.filter(el => el.Pays == pays)
+                                 .sort((a, b) => b["Cumul"] - a["Cumul"])
+                                 .slice(0, 5);
+    // console.log(topFive);
+    
+    let clObj = {
+      "Pays": nomPaysJoueur(topFive[0].Nom),
+      "Premier": topFive[0].Nom.slice(0, 5) + "..." + "(" + clString(topFive[0].Rang) + "/" + topFive[0]["Cumul"] + ")",
+      "Deuxième": topFive[1].Nom.slice(0, 5) + "..." + "(" + clString(topFive[1].Rang) + "/" + topFive[1]["Cumul"] + ")",
+      "Troisième": topFive[2].Nom.slice(0, 5) + "..." + "(" + clString(topFive[2].Rang) + "/" + topFive[2]["Cumul"] + ")",
+      "Quatrième": topFive[3].Nom.slice(0, 5) + "..." + "(" + clString(topFive[3].Rang) + "/" + topFive[3]["Cumul"] + ")",
+      "Cinquième": topFive[4].Nom.slice(0, 5) + "..." + "(" + clString(topFive[4].Rang) + "/" + topFive[4]["Cumul"] + ")",
+      "Cumul": topFive.reduce((t, el) => t + el["Cumul"], 0)
+    }
+
+    classementArr.push(clObj);
+  }
+  
+  return classementArr.sort((a, b) => b.Cumul - a.Cumul);
+
+  
+}
+
 (async function launch() {
 
-  let classement = await classementPartie(numPartie);
-  // let classement = await bilanDuCoupParTable(numPartie, 23);
-  // let classement = await classementAuCumul(numPartie);
+  // let classement = await classementPartie(numPartie);
+  // let classement = await bilanDuCoupParTable(numPartie, 15);
+  let classement = await classementAuCumul(numPartie);
+  // let classement = require("./classementTest.json");
+  clipboardy.writeSync(JSON.stringify(classement));
+  classement = classementParNations(classement, numPartie);
 
   console.table(classement);
 
