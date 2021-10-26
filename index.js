@@ -189,7 +189,6 @@ async function classementAuCumul(nbParties) {
 
   for (let i = 1; i <= nbParties; i++) {
     let clPartie = await classementPartie(i, true);
-    console.log(clPartie.length);
     clPartie = clPartie.map((el) => {
       let newEl = el;
       if (newEl["Négatif"] == "Top") newEl["Négatif"] = 0;
@@ -205,23 +204,24 @@ async function classementAuCumul(nbParties) {
             indPartie = j + 1;
           }
         }
-        plCopy["P" + indPartie] = pl["Négatif"];
+        plCopy["P" + indPartie] = pl["Négatif"] == 0 ? "Top": pl["Négatif"];
         cumulArr = cumulArr.filter((el) => el.Nom != pl.Nom);
         cumulArr.push(plCopy);
       } else {
-        pl["P1"] = pl["Négatif"];
+        pl["P1"] = pl["Négatif"] == 0 ? "Top": pl["Négatif"];
         cumulArr.push(pl);
       }
     }
   }
 
+  let allPs = [];
+  for(let k=1; k<=nbParties; k++)
+  {
+    allPs.push("P"+k);
+  }
   cumulArr = cumulArr.sort((a, b) => b["Négatif"] - a["Négatif"]);
   cumulArr = cumulArr.filter(
-    (pl) =>
-      pl.hasOwnProperty("P1") &&
-      pl.hasOwnProperty("P2") &&
-      pl.P1 != undefined &&
-      pl.P2 != undefined
+    (pl) => allPs.every(pp => pl.hasOwnProperty(pp) && pl[pp]!=undefined)  
   );
   cumulArr = cumulArr.map((el) => {
     let newEl = el;
@@ -306,11 +306,11 @@ function classementParNations(classementGlobal, np) {
 (async function launch() {
 
   // let classement = await classementPartie(numPartie);
-  // let classement = await bilanDuCoupParTable(numPartie, 15);
+  // let classement = await bilanDuCoupParTable(numPartie, 11);
   let classement = await classementAuCumul(numPartie);
   // let classement = require("./classementTest.json");
-  clipboardy.writeSync(JSON.stringify(classement));
-  classement = classementParNations(classement, numPartie);
+  // clipboardy.writeSync(JSON.stringify(classement));
+  // classement = classementParNations(classement, numPartie);
 
   console.table(classement);
 
