@@ -9,9 +9,10 @@ var parametresTournoi = require("./parametresTournoi.json")
 
 
 
-var lienTournoi = parametresTournoi.lienTournoi;
-var numPartie = parametresTournoi.numeroPartie;
-let nomTournoi = parametresTournoi.nomTournoi;
+const lienTournoi = parametresTournoi.lienTournoi;
+const numPartie = parametresTournoi.numeroPartie;
+const nomTournoi = parametresTournoi.nomTournoi;
+const intrus = parametresTournoi.intrus;
 
 
 function linkBuilder(np, nc) {
@@ -103,7 +104,9 @@ async function classementPartie(np, pourCumul = false) {
     canProcess = classementArr.length > 3;
   }
 
-  playersNegatifsInfos = playersNegatifsInfos.sort(
+  playersNegatifsInfos = playersNegatifsInfos
+    .filter(obj => !intrus.includes(obj.Nom))
+    .sort(
     (a, b) => b["Négatif"] - a["Négatif"]
   );
   playersNegatifsInfos = playersNegatifsInfos.map((el) => {

@@ -1,5 +1,12 @@
 {
-    "lienTournoi": "https://www.ffsc.fr/endirect/endirect.php?tournoi_id=cdm2021qualifpaires&page=parties",
-    "nomTournoi": "CDM PAIRES AIX-LES-BAINS 2021",
-    "numeroPartie": 2
+    "lienTournoi": "https://www.ffsc.fr/endirect/endirect.php?tournoi_id=cdm2021blitz&page=parties",
+    "nomTournoi": "CDM BLITZ AIX-LES-BAINS 2021",
+    "numeroPartie": 2,
+    "intrus": [
+               "TCHOUYO Eric Salvador",
+               "OMAM Ruben Legrand",
+               "LOUGUE Issoufou",
+               "FONKEU NGAHAN Yannick",
+               "GEERAERT Stéphane"
+            ]
 }
